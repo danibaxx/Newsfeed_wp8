@@ -88,6 +88,25 @@ const data = [
   }
 ];
 
+function newsCreator() {
+  const newsTitle = document.createElement('h2');
+  const newsDate = document.createElement('p');
+
+  newsTitle.classList.add('h2-primary');
+  newsDate.classList.add('p-primary');
+}
+
+const container = document.querySelector('.articles');
+
+const newsArr = data.map((newsfeed) => {
+  
+});
+
+data.forEach((newsfeed) => {
+  // container.appendChild(newsfeed);
+});
+
+console.log(newsArr);
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
   <div class="article">
@@ -101,7 +120,7 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
+  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
