@@ -88,25 +88,55 @@ const data = [
   }
 ];
 
-function newsCreator() {
-  const newsTitle = document.createElement('h2');
-  const newsDate = document.createElement('p');
+function newsCreator(items) {
+  const mainDiv = document.createElement('div');
+  mainDiv.classList.add('article');
 
-  newsTitle.classList.add('h2-primary');
-  newsDate.classList.add('p-primary');
+  const newsTitle = document.createElement('h2');
+  newsTitle.textContent = items.title;
+
+  const newsDate = document.createElement('p');
+  newsDate.textContent = items.date;
+
+  newsDate.classList.add('date');
+
+  // can call each p tag individually
+  // const p1 = document.createElement('p');
+  // p1.textContent = items.firstParagraph;
+  // const p2 = document.createElement('p');
+  // p2.textContent = items.secondParagraph;
+  // const p3 = document.createElement('p');
+  // p3.textContent = items.thirdParagraph;
+  
+  const paragraphs = [];
+    for(let i = 0; i < 3; i++) {
+      paragraphs.push(document.createElement('p'));
+    };
+  paragraphs[0].textContent = items.firstParagraph;
+  paragraphs[1].textContent = items.secondParagraph;
+  paragraphs[2].textContent = items.thirdParagraph;
+
+  const span = document.createElement('span');
+  span.classList.add('expandButton');
+  span.textContent = 'Read More';
+  span.addEventListener('click', event => {
+    event.preventDefault();
+    mainDiv.classList.toggle('article-open');
+  });
+
+  mainDiv.appendChild(newsTitle);
+  mainDiv.appendChild(newsDate);
+  paragraphs.forEach(p => mainDiv.appendChild(p));
+  mainDiv.appendChild(span);
+
+  return mainDiv;
 }
 
-const container = document.querySelector('.articles');
+// console.log(newsCreator());
+const articlesDiv = document.querySelector('.articles');
+data.forEach(items => articlesDiv.append(newsCreator(items)));
 
-const newsArr = data.map((newsfeed) => {
-  
-});
 
-data.forEach((newsfeed) => {
-  // container.appendChild(newsfeed);
-});
-
-console.log(newsArr);
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
   <div class="article">
