@@ -88,6 +88,55 @@ const data = [
   }
 ];
 
+function newsCreator(items) {
+  const mainDiv = document.createElement('div');
+  mainDiv.classList.add('article');
+
+  const newsTitle = document.createElement('h2');
+  newsTitle.textContent = items.title;
+
+  const newsDate = document.createElement('p');
+  newsDate.textContent = items.date;
+
+  newsDate.classList.add('date');
+
+  // can call each p tag individually
+  // const p1 = document.createElement('p');
+  // p1.textContent = items.firstParagraph;
+  // const p2 = document.createElement('p');
+  // p2.textContent = items.secondParagraph;
+  // const p3 = document.createElement('p');
+  // p3.textContent = items.thirdParagraph;
+  
+  const paragraphs = [];
+    for(let i = 0; i < 3; i++) {
+      paragraphs.push(document.createElement('p'));
+    };
+  paragraphs[0].textContent = items.firstParagraph;
+  paragraphs[1].textContent = items.secondParagraph;
+  paragraphs[2].textContent = items.thirdParagraph;
+
+  const span = document.createElement('span');
+  span.classList.add('expandButton');
+  span.textContent = 'Read More';
+  span.addEventListener('click', event => {
+    event.preventDefault();
+    mainDiv.classList.toggle('article-open');
+  });
+
+  mainDiv.appendChild(newsTitle);
+  mainDiv.appendChild(newsDate);
+  paragraphs.forEach(p => mainDiv.appendChild(p));
+  mainDiv.appendChild(span);
+
+  return mainDiv;
+}
+
+// console.log(newsCreator());
+const articlesDiv = document.querySelector('.articles');
+data.forEach(items => articlesDiv.append(newsCreator(items)));
+
+
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
   <div class="article">
@@ -101,7 +150,7 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
+  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
